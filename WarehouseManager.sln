@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseManager.Server", "WarehouseManager\Server\WarehouseManager.Server.csproj", "{C1A7D544-BA63-4D70-AFAC-7626AEFD1113}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseManager.Server", "WarehouseManager\Server\WarehouseManager.Server.csproj", "{C1A7D544-BA63-4D70-AFAC-7626AEFD1113}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseManager.Client", "WarehouseManager\Client\WarehouseManager.Client.csproj", "{D5D04753-F60C-4975-A1A6-17384E6AA6F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseManager.Client", "WarehouseManager\Client\WarehouseManager.Client.csproj", "{D5D04753-F60C-4975-A1A6-17384E6AA6F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseManager.Shared", "WarehouseManager\Shared\WarehouseManager.Shared.csproj", "{0C677BA1-3147-4A4A-95E8-6511E6909E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseManager.Shared", "WarehouseManager\Shared\WarehouseManager.Shared.csproj", "{0C677BA1-3147-4A4A-95E8-6511E6909E47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
