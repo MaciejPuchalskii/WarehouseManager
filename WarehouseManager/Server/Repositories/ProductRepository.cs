@@ -13,7 +13,7 @@ namespace WarehouseManager.Server.Repositories
 
         public async Task<List<Product>?> GetAllProducts()
         {
-            return await _appDbContext.Products.OrderByDescending(p => p.Id).ToListAsync();
+            return await _appDbContext.Products.OrderBy(p => p.Id).ToListAsync();
         }
         public async Task<Product?> GetProductById(int id)
         {

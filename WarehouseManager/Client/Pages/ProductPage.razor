@@ -1,5 +1,5 @@
 ﻿
-<h3>WareHouse Products</h3>
+<h3> Products</h3>
 
 @using System.Globalization;
 @using WarehouseManager.Shared;
@@ -8,32 +8,42 @@
 <div class="row">
 	@if (Products != null)
 	{
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Manufacturer</th>
-                    <th>Purchase Price</th>
-                    <th>Sale Price</th>
-                    <th>Quantity</th>
-                </tr>
-            </thead>
-            <tbody>
-                    @foreach (var p in Products)
-                    {
+        <div class="row">
+            @if (Products != null)
+            {
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>@p.Id</td>
-                            <td>@p.Name</td>
-                            <td>@p.Manufacturer</td>
-                            <td>@p.PurchasePrice.ToString("C", CultureInfo.CurrentCulture)</td>
-                            <td>@p.SalePrice.ToString("C", CultureInfo.CurrentCulture)</td>
-                            <td>@p.Quantity</td>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Manufacturer</th>
+                            <th>Purchase Price</th>
+                            <th>Sale Price</th>
+                            <th>Quantity</th>
+                            <th>Select</th>
                         </tr>
-                    }
-            </tbody>
-        </table>
-		
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Products)
+                        {
+                            <tr>
+                                <td>@p.Id</td>
+                                <td>@p.Name</td>
+                                <td>@p.Manufacturer</td>
+                                <td>@p.PurchasePrice.ToString("C", CultureInfo.CurrentCulture)</td>
+                                <td>@p.SalePrice.ToString("C", CultureInfo.CurrentCulture)</td>
+                                <td>@p.Quantity</td>
+                                <td><input type="checkbox" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="badge text-center">Please Wait ... </div>
+            }
+        </div>
 	}
 	else
 	{
