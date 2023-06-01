@@ -1,0 +1,56 @@
+﻿@page "/add-new-product"
+@using Markdig;
+@using WarehouseManager.Shared;
+@inject WarehouseManager.Client.Services.IProductService productService;
+@inject NavigationManager NavigationManager;
+
+<h3>Add new product</h3>
+
+<EditForm Model="@product" OnValidSubmit="CreateProduct">
+    <DataAnnotationsValidator />
+    <div class="row">
+        <div class="form-group mt-2">
+            <label for="name">Name:</label>
+            <InputText id="name" class="form-control" @bind-Value="@product.Name" />
+            <ValidationMessage For="@(() => product.Name)" />
+        </div>
+
+        <div class="form-group">
+            <label for="manufacturer">Manufacturer:</label>
+            <InputText id="manufacturer" class="form-control" @bind-Value="@product.Manufacturer" />
+            <ValidationMessage For="@(() => product.Manufacturer)" />
+        </div>
+
+        <div class="form-group">
+            <label for="purchasePrice">Purchase Price:</label>
+            <InputNumber id="purchasePrice" class="form-control" @bind-Value="@product.PurchasePrice" />
+            <ValidationMessage For="@(() => product.PurchasePrice)" />
+        </div>
+
+        <div class="form-group">
+            <label for="salePrice">Sale Price:</label>
+            <InputNumber id="salePrice" class="form-control" @bind-Value="@product.SalePrice" />
+            <ValidationMessage For="@(() => product.SalePrice)" />
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <InputNumber id="quantity" class="form-control" @bind-Value="@product.Quantity" />
+            <ValidationMessage For="@(() => product.Quantity)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-1">Add</button>
+</EditForm>
+
+
+@code {
+    private Product product = new Product();
+
+    int selectedId;
+
+    async void CreateProduct()
+	{
+        var result = await productService.CreateNewProduct(product);
+	}
+}

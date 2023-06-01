@@ -8,5 +8,7 @@ namespace WarehouseManager.Client.Services
         Task<Product?> GetProductById(int id);
         Task<Product?> CreateNewProduct(Product product);
         Task<List<Product>> SearchProduct(string text);
+        Task<bool> DeleteProduct(int id);
+
     }
 }

@@ -11,7 +11,6 @@ namespace WarehouseManager.Client.Services
         {
             this.httpClient = httpClient;
         }
-
         public async Task<List<Product>?> GetAllProducts()
         {
             return await httpClient.GetFromJsonAsync<List<Product>>("api/Products");
@@ -32,13 +31,23 @@ namespace WarehouseManager.Client.Services
         }
         public async Task<Product?> CreateNewProduct(Product product)
         {
-            var result = await httpClient.PostAsJsonAsync("api/Product", product);
+            var result = await httpClient.PostAsJsonAsync("api/Products", product);
             return await result.Content.ReadFromJsonAsync<Product>();
         }
 
 
+        public async Task<Product?> UpdateProduct(int id, Product product)
+        {
+            var result = await httpClient.PutAsJsonAsync($"api/Products/{id}", product);
+            return await result.Content.ReadFromJsonAsync<Product>();
+        }
 
-   
+        public async Task<bool> DeleteProduct(int id)
+        {
+            var result = await httpClient.DeleteAsync($"api/Products/{id}");
+            return result.IsSuccessStatusCode;
+        }
+
         public async Task<List<Product?>> SearchProduct(string text)
         {
             return await httpClient.GetFromJsonAsync<List<Product>>($"api/Product/search/{text}");

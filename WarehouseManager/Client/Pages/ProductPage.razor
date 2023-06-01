@@ -6,10 +6,10 @@
 @inject WarehouseManager.Client.Services.IProductService productService
 
 <div class="row">
-	@if (Products != null)
-	{
+    @if (Products != null)
+    {
         <div class="row">
-            @if (Products != null)
+            @if (Products.Count > 0)
             {
                 <table class="table table-striped">
                     <thead>
@@ -33,29 +33,59 @@
                                 <td>@p.PurchasePrice.ToString("C", CultureInfo.CurrentCulture)</td>
                                 <td>@p.SalePrice.ToString("C", CultureInfo.CurrentCulture)</td>
                                 <td>@p.Quantity</td>
-                                <td><input type="checkbox" /></td>
+                                <td><input type="checkbox" @onchange="() => RemoveProduct(p.Id)" /></td>
                             </tr>
                         }
                     </tbody>
                 </table>
+                <button class="btn btn-primary" @onclick="RemoveSelectedProducts">Remove Selected Products</button>
             }
             else
             {
-                <div class="badge text-center">Please Wait ... </div>
+                <div class="badge text-center">No products available.</div>
             }
         </div>
-	}
-	else
-	{
-		<div class="badge text-center">Please Wait ... </div>
-	}
+    }
+    else
+    {
+        <div class="badge text-center">Please wait...</div>
+    }
 </div>
 
 @code {
-	private List<Product> Products = new List<Product>();
+    private List<Product> Products = new List<Product>();
+    private List<int> SelectedProductIds = new List<int>();
 
-	protected override async Task OnInitializedAsync()
-	{
-		Products = await productService.GetAllProducts();
-	}
+    protected override async Task OnInitializedAsync()
+    {
+        Products = await productService.GetAllProducts();
+    }
+
+    private void RemoveProduct(int productId)
+    {
+        if (SelectedProductIds.Contains(productId))
+        {
+            SelectedProductIds.Remove(productId);
+        }
+        else
+        {
+            SelectedProductIds.Add(productId);
+        }
+    }
+
+    private async Task RemoveSelectedProducts()
+    {
+        if (SelectedProductIds.Count > 0)
+        {
+            // Call the remove product API or perform the desired action
+            foreach (int productId in SelectedProductIds)
+            {
+                // Remove the product from the list
+                Products.RemoveAll(p => p.Id == productId);
+                productService.DeleteProduct(productId);
+            }
+
+            SelectedProductIds.Clear();
+        }
+    }
 }
