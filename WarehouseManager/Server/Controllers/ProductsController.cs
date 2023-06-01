@@ -33,5 +33,11 @@ namespace WarehouseManager.Server.Controllers
         [HttpGet("search/{searchText}")]
         public ActionResult<List<Product>> SearchProducts(string searchText)
         { return Ok(_productRepository.SearchProduct(searchText));}
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteProduct(int id)
+        {
+            return Ok(_productRepository.DeleteProduct(id));    
+        }
     }
 }

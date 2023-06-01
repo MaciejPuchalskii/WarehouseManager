@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
 using WarehouseManager.Server.Data;
 using WarehouseManager.Shared;
 
@@ -27,7 +28,17 @@ namespace WarehouseManager.Server.Repositories
             return product;
         }
 
-
+        public async Task<bool> DeleteProduct(int id)
+        {
+            var product = await _appDbContext.Products.FindAsync(id);
+            if (product != null)
+            {
+                _appDbContext.Products.Remove(product);
+                await _appDbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
 
         public async Task<List<Product>> SearchProduct(string text)
         {
